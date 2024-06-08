@@ -1,0 +1,11 @@
+.active path {
+    fill: #F2F2F2 !important;
+}
+
+.dark path {
+    fill: #333333
+}
+
+.primary path {
+    fill: #2F80ED
+}
