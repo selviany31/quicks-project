@@ -9,16 +9,26 @@ import LayoutTask from './components/layout';
 
 const TaskCard = ({ show }) => {
   const { taskState, taskDispatch } = useContext(GlobalContext);
-  const { data, loading } = taskState;
+  const { data, filter, loading } = taskState;
 
   const [numberTask, setNumberTask] = useState(0);
   const [scroll, setScroll] = useState(false);
+  const [current, setCurrent] = useState([]);
+  const [isFilter, setIsFilter] = useState(false);
 
   const onDeleteTask = () => {
     setNumberTask(numberTask - 1);
   };
 
   const listRef = useRef();
+
+  useEffect(() => {
+    if (isFilter) {
+      setCurrent(filter);
+    } else {
+      setCurrent(data);
+    }
+  }, [data, filter, isFilter]);
 
   useEffect(() => {
     if (scroll) {
@@ -45,6 +55,7 @@ const TaskCard = ({ show }) => {
         setNumberTask={setNumberTask}
         dispatch={taskDispatch}
         setScroll={setScroll}
+        setIsFilter={setIsFilter}
       >
         {loading ? (
           <div className='h-[90%] w-full flex justify-center items-center'>
@@ -58,7 +69,7 @@ const TaskCard = ({ show }) => {
           </div>
         ) : (
           <div className='h-[95%] overflow-y-auto pr-4' ref={listRef}>
-            {data?.map((item, i) => (
+            {current?.map((item, i) => (
               <TaskList key={i} data={item} onDelete={() => {}} />
             ))}
             {Array.from({ length: numberTask })?.map((_, i) => (

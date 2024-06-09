@@ -9,6 +9,7 @@ const LayoutTask = ({
   setNumberTask,
   setScroll,
   dispatch,
+  setIsFilter,
 }) => {
   const [dropdown, setDropdown] = useState(false);
   const [label, setLabel] = useState('My Task');
@@ -35,6 +36,7 @@ const LayoutTask = ({
                 onClick={() => {
                   setLabel('My Task');
                   filterTask(dispatch, []);
+                  setIsFilter(false);
                 }}
               >
                 My Task
@@ -48,6 +50,7 @@ const LayoutTask = ({
                 onClick={() => {
                   setLabel('Personal Errands');
                   filterTask(dispatch, ['Self Task', 'Appointments']);
+                  setIsFilter(true);
                 }}
               >
                 Personal Errands
@@ -61,6 +64,7 @@ const LayoutTask = ({
                 onClick={() => {
                   setLabel('Urgent To Do');
                   filterTask(dispatch, ['Important ASAP', 'ASAP']);
+                  setIsFilter(true);
                 }}
               >
                 Urgent To Do

@@ -2,7 +2,7 @@
 
 export default {
   data: [],
-  backUp: [],
+  filter: [],
   loading: false,
   error: null,
 };

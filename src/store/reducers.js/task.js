@@ -10,7 +10,6 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: payload,
-        backUp: payload,
         loading: false,
       };
 
@@ -25,7 +24,6 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: state.data.concat(payload),
-        backUp: state.data.concat(payload),
         loading: false,
       };
 
@@ -38,12 +36,6 @@ const taskReducer = (state, { payload, type }) => {
           }
           return el;
         }),
-        backUp: state.data.map((el) => {
-          if (el.id === payload.id) {
-            return payload;
-          }
-          return el;
-        }),
         loading: false,
       };
 
@@ -51,17 +43,16 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: state.data?.filter((el) => el.id !== payload),
-        backUp: state.data?.filter((el) => el.id !== payload),
       };
 
     case 'FILTER_TASK':
       return {
         ...state,
-        data: payload?.length
-          ? state.backUp?.filter((el) =>
+        filter: payload?.length
+          ? state.data?.filter((el) =>
               el.bookmark.some((e) => payload.includes(e))
             )
-          : state.backUp,
+          : state.data,
       };
 
     default:
