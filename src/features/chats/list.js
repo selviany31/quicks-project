@@ -61,8 +61,9 @@ const ChatList = ({ setShowDetail, setDetail }) => {
           </div>
         ) : (
           currentData?.map((item, i) => (
-            <>
+            <div key={i}>
               <button
+                key={i}
                 className='py-[1.375rem] flex justify-between items-center w-full'
                 onClick={() => {
                   setShowDetail(true);
@@ -102,7 +103,7 @@ const ChatList = ({ setShowDetail, setDetail }) => {
                   data?.length - 1 === i ? 'hidden' : ''
                 }`}
               />
-            </>
+            </div>
           ))
         )}
       </div>

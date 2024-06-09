@@ -27,8 +27,9 @@ const BookmarkTask = ({ taskData, setTaskData, onDelete, dispatch }) => {
         }
       >
         <div className='p-3 grid gap-y-2'>
-          {bookmark.map((el) => (
+          {bookmark.map((el, i) => (
             <button
+              key={i}
               className='text-start'
               onClick={() => {
                 if (taskData?.id) {

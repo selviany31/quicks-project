@@ -57,19 +57,17 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
     return mergeArr.filter((el) => el.id === value)[0];
   };
 
-  console.log();
-
   return (
     <>
       {groupKey?.map((el, i) => (
-        <>
+        <div key={i}>
           <div className='flex justify-between items-center mb-2 mt-4'>
             <hr className='border-darkSecondary w-1/3' />
             <p className='font-bold text-darkSecondary'>{formatDay(el)}</p>
             <hr className='border-darkSecondary w-1/3' />
           </div>
           {groupByTime?.[`${el}`]?.map((el, i) => (
-            <>
+            <div key={i}>
               {el?.isRead === 0 ? (
                 <>
                   <div className='flex justify-between items-center mb-2 mt-4'>
@@ -110,9 +108,9 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
                   />
                 </div>
               )}
-            </>
+            </div>
           ))}
-        </>
+        </div>
       ))}
     </>
   );

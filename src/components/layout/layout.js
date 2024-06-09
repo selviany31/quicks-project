@@ -49,6 +49,7 @@ const Layout = () => {
               <>
                 {btnArr?.map((el, i) => (
                   <div
+                    key={i}
                     className={`${!move ? expand : ''} ${move} ml-5`}
                     style={{
                       '--delay': !show ? i * 0.25 + 's' : '',
