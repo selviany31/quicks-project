@@ -1,19 +1,25 @@
-import { useContext, useEffect } from 'react';
-import CustomSvg from '../svg/svg';
-import IconProfile from './icon-profile';
+import { useContext, useEffect, useState } from 'react';
 import { getDataInbox, searchInbox } from '../../store/actions/inbox';
 import { GlobalContext } from '../../store/store';
 import { formatDate } from '../../utils/utils';
-import Spinner from '../spinner/spinner';
+import CustomSvg from '../../components/svg/svg';
+import Spinner from '../../components/spinner/spinner';
+import IconProfile from './components/icon-profile';
 
 const ChatList = ({ setShowDetail, setDetail }) => {
   const { inboxState, inboxDispatch } = useContext(GlobalContext);
   const { data, filter, loading } = inboxState;
 
-  const handleRead = (item) => {
-    const filterRead = item?.chats?.filter((el) => el.isRead === 0);
-    return filterRead?.length ? true : false;
-  };
+  const [currentData, setCurrentData] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
+
+  useEffect(() => {
+    if (isSearch) {
+      setCurrentData(filter);
+    } else {
+      setCurrentData(data);
+    }
+  }, [data, filter, isSearch]);
 
   useEffect(() => {
     if (!data?.length) {
@@ -27,9 +33,12 @@ const ChatList = ({ setShowDetail, setDetail }) => {
         <input
           placeholder='Search'
           className='w-full focus:outline-none'
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+          onChange={(e) => {
+            if (e.target.value) {
               searchInbox(inboxDispatch, e.target.value);
+              setIsSearch(true);
+            } else {
+              setIsSearch(false);
             }
           }}
         />
@@ -51,7 +60,7 @@ const ChatList = ({ setShowDetail, setDetail }) => {
             />
           </div>
         ) : (
-          data?.map((item, i) => (
+          currentData?.map((item, i) => (
             <>
               <button
                 className='py-[1.375rem] flex justify-between items-center w-full'

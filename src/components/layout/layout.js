@@ -1,12 +1,12 @@
 import CircleBtn from '../button/circle-btn';
 import { useEffect, useState } from 'react';
 import CustomSvg from '../svg/svg';
-import ChatCard from '../chats/chat';
-import TaskCard from '../tasks/task';
+import TaskCard from '../../features/tasks/task';
+import ChatCard from '../../features/chats/chat';
 
 const Layout = () => {
   const [expand, setExpand] = useState('opacity-0');
-  const [show, setShow] = useState('');
+  const [show, setShow] = useState(null);
   const [move, setMove] = useState('');
   const [btnArr, setBtnArr] = useState(['task', 'message']);
 
@@ -42,11 +42,8 @@ const Layout = () => {
           </div>
           <div className='fixed bottom-6 right-6'>
             <div className='mb-3'>
-              {show === 'message' ? (
-                <ChatCard show={show} />
-              ) : (
-                <TaskCard show={show} />
-              )}
+              {show === 'message' && <ChatCard show={show} />}
+              {show === 'task' && <TaskCard show={show} />}
             </div>
             <div className='flex items-center justify-end'>
               <>

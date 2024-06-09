@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { deleteMessage } from '../../store/actions/inbox';
-import { formatDate } from '../../utils/utils';
-import Dropdown from '../button/dropdown';
-import CustomSvg from '../svg/svg';
-import { GlobalContext } from '../../store/store';
+import { deleteMessage } from '../../../store/actions/inbox';
+import { formatDate } from '../../../utils/utils';
+import { GlobalContext } from '../../../store/store';
+import Dropdown from '../../../components/button/dropdown';
+import CustomSvg from '../../../components/svg/svg';
 
 const MessageCard = ({ data, id, setEdit, setMessage, setReply }) => {
   const { inboxDispatch } = useContext(GlobalContext);

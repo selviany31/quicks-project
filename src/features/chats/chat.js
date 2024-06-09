@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import ModalCard from '../modal/modal';
+import ModalCard from '../../components/modal/modal';
 import ChatDetail from './detail';
 import ChatList from './list';
 import { GlobalContext } from '../../store/store';
@@ -7,7 +7,7 @@ import { readMessage } from '../../store/actions/inbox';
 
 const ChatCard = ({ show }) => {
   const { inboxState, inboxDispatch } = useContext(GlobalContext);
-  const { data, chats } = inboxState;
+  const { chats } = inboxState;
 
   const [showDetail, setShowDetail] = useState(false);
   const [detail, setDetail] = useState([]);
@@ -16,8 +16,7 @@ const ChatCard = ({ show }) => {
     if (chats?.length && !showDetail) {
       readMessage(inboxDispatch, detail);
     }
-  }, [inboxDispatch, chats?.length, showDetail]);
-  console.log(chats, data, detail);
+  }, [inboxDispatch, chats?.length, showDetail, detail]);
 
   return (
     <ModalCard

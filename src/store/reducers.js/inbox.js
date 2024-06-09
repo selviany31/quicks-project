@@ -1,5 +1,4 @@
 const inboxReducer = (state, { payload, type }) => {
-  console.log(state, 'state', payload);
   switch (type) {
     case 'INBOX_LOADING':
       return {
@@ -132,7 +131,7 @@ const inboxReducer = (state, { payload, type }) => {
         backUp: state.data.filter((el) =>
           el.title.toLowerCase().includes(payload)
         ),
-        data: state.backUp.filter((el) =>
+        filter: state.data.filter((el) =>
           el.title.toLowerCase().includes(payload)
         ),
       };

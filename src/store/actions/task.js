@@ -18,12 +18,12 @@ export const getDataTask = async (dispatch) => {
       });
     })
     .catch((error) => {
-      const result = error;
+      const result = error.response;
 
       // set error if has any
       dispatch({
         type: 'TASK_LOADING',
-        payload: error.response,
+        payload: result,
       });
     });
 };
@@ -46,16 +46,6 @@ export const deleteTask = (dispatch, id) => {
   dispatch({
     type: 'DELETE_TASK',
     payload: id,
-  });
-};
-
-export const addBookmark = (dispatch, id, data) => {
-  dispatch({
-    type: 'ADD_BOOKMARK',
-    payload: {
-      id: id,
-      data: data,
-    },
   });
 };
 

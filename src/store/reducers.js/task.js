@@ -54,29 +54,6 @@ const taskReducer = (state, { payload, type }) => {
         backUp: state.data?.filter((el) => el.id !== payload),
       };
 
-    case 'ADD_BOOKMARK':
-      return {
-        ...state,
-        backUp: state.data.map((el) => {
-          if (el.id === payload.id) {
-            return {
-              ...el,
-              bookmark: el.bookmark.concat(payload.data),
-            };
-          }
-          return el;
-        }),
-        data: state.data.map((el) => {
-          if (el.id === payload.id) {
-            return {
-              ...el,
-              bookmark: el.bookmark.concat(payload.data),
-            };
-          }
-          return el;
-        }),
-      };
-
     case 'FILTER_TASK':
       return {
         ...state,

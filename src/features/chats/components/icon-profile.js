@@ -1,4 +1,4 @@
-import CustomSvg from '../svg/svg';
+import CustomSvg from '../../../components/svg/svg';
 
 const IconProfile = ({ isGroup, label }) => {
   const handleLabel = () => {
