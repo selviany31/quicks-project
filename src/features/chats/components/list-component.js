@@ -8,6 +8,7 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
   const { chats } = inboxState;
 
   const selectedChat = chats?.filter((el) => el.inboxId === id)?.[0];
+
   // grouping array by selected key
   const groupBy = function (items, key) {
     return items?.reduce(function (rv, x) {
@@ -15,6 +16,7 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
       return rv;
     }, {});
   };
+
   // grouping array by time key
   const groupByTime = groupBy(selectedChat?.messages, 'time');
 
@@ -38,8 +40,14 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
       groupByUser?.[el]?.map((el) => {
         return {
           ...el,
-          bg_color: bgColor[i % bgColor.length],
-          color: color[i % color.length],
+          bg_color:
+            selectedChat?.participants === ''
+              ? 'bg-[#f8f8f8]'
+              : bgColor[i % bgColor.length],
+          color:
+            selectedChat?.participants === ''
+              ? 'text-primary'
+              : color[i % color.length],
         };
       })
     );
@@ -48,6 +56,8 @@ const ListComponent = ({ id, setEdit, setMessage, setReply }) => {
 
     return mergeArr.filter((el) => el.id === value)[0];
   };
+
+  console.log();
 
   return (
     <>
