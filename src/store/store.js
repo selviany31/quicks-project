@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
 import inboxReducer from './reducers.js/inbox';
-import inbox, { inboxInitialState } from './initialstates/inbox';
+import { inboxInitialState } from './initialstates/inbox';
 import taskReducer from './reducers.js/task';
 import task from './initialstates/task';
 

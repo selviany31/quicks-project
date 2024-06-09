@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import axios from 'axios';
 
 export const getDataInbox = async (dispatch) => {
@@ -19,12 +18,12 @@ export const getDataInbox = async (dispatch) => {
       });
     })
     .catch((error) => {
-      const result = error;
+      const result = error.response;
 
       // set error if has any
       dispatch({
         type: 'INBOX_LOADING',
-        payload: error.response,
+        payload: result,
       });
     });
 };
@@ -49,12 +48,12 @@ export const getDataChats = async (dispatch, id) => {
       });
     })
     .catch((error) => {
-      const result = error;
+      const result = error.response;
 
       // set error if has any
       dispatch({
         type: 'INBOX_LOADING',
-        payload: error.response,
+        payload: result,
       });
     });
 };
