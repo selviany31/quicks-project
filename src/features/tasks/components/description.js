@@ -3,7 +3,6 @@ import { addTask, editTask } from '../../../store/actions/task';
 import { uid } from '../../../utils/utils';
 
 const DescTask = ({
-  data,
   desc,
   setDesc,
   taskData,
@@ -15,7 +14,7 @@ const DescTask = ({
     <>
       <CustomSvg
         icon='assets/icons/pencil.svg'
-        isActive={data?.desc ? 'primary' : ''}
+        isActive={taskData?.desc ? 'primary' : ''}
       />
       <div className='ml-5 text-xs w-[90%]'>
         {desc ? (
@@ -30,7 +29,7 @@ const DescTask = ({
                 if (e.key === 'Enter') {
                   setDesc(!desc);
                   setTaskData({ ...taskData, desc: e.target.value });
-                  if (data) {
+                  if (taskData?.id) {
                     editTask(dispatch, {
                       ...taskData,
                       desc: e.target.value,
@@ -52,7 +51,7 @@ const DescTask = ({
             className='cursor-pointer'
             onClick={() => (taskData?.done === 1 ? '' : setDesc(!desc))}
           >
-            {data?.desc ? data?.desc : 'No Description'}
+            {taskData?.desc ? taskData?.desc : 'No Description'}
           </p>
         )}
       </div>

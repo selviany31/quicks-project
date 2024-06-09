@@ -1,11 +1,11 @@
 import CustomSvg from '../../../components/svg/svg';
 import { editTask } from '../../../store/actions/task';
 
-const Checkbox = ({ data, taskData, setTaskData, dispatch }) => {
+const Checkbox = ({ taskData, setTaskData, dispatch }) => {
   return (
     <button
       onClick={() => {
-        if (data) {
+        if (taskData) {
           setTaskData({
             ...taskData,
             done: taskData?.done === 1 ? 0 : 1,
@@ -19,7 +19,7 @@ const Checkbox = ({ data, taskData, setTaskData, dispatch }) => {
     >
       <CustomSvg
         icon={`assets/icons/${
-          data?.done === 1 ? 'checkbox' : 'checkbox-blank'
+          taskData?.done === 1 ? 'checkbox' : 'checkbox-blank'
         }.svg`}
         styles='w-[18px] h-[18px]'
       />

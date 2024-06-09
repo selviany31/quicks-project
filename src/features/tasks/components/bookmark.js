@@ -4,7 +4,7 @@ import CustomSvg from '../../../components/svg/svg';
 import { addTask, editTask } from '../../../store/actions/task';
 import { uid } from '../../../utils/utils';
 
-const BookmarkTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
+const BookmarkTask = ({ taskData, setTaskData, onDelete, dispatch }) => {
   const bookmark = [
     'Important ASAP',
     'Offline Meeting',
@@ -21,7 +21,7 @@ const BookmarkTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
         btn={
           <CustomSvg
             icon='assets/icons/bookmark.svg'
-            isActive={data?.bookmark?.length ? 'primary' : ''}
+            isActive={taskData?.bookmark?.length ? 'primary' : ''}
             styles='w-[19px] h-[20px]'
           />
         }
@@ -31,7 +31,7 @@ const BookmarkTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
             <button
               className='text-start'
               onClick={() => {
-                if (data) {
+                if (taskData?.id) {
                   editTask(dispatch, {
                     ...taskData,
                     bookmark: taskData.bookmark.concat(el),
@@ -56,7 +56,7 @@ const BookmarkTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
         </div>
       </Dropdown>
       <div className='ml-4 flex gap-x-2'>
-        {data?.bookmark?.map((el) => (
+        {taskData?.bookmark?.map((el) => (
           <StickerCard label={el} />
         ))}
       </div>

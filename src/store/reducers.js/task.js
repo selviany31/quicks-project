@@ -10,6 +10,7 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: payload,
+        filter: payload,
         loading: false,
       };
 
@@ -24,6 +25,7 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: state.data.concat(payload),
+        filter: state.filter.concat(payload),
         loading: false,
       };
 
@@ -36,6 +38,12 @@ const taskReducer = (state, { payload, type }) => {
           }
           return el;
         }),
+        filter: state.filter.map((el) => {
+          if (el.id === payload.id) {
+            return payload;
+          }
+          return el;
+        }),
         loading: false,
       };
 
@@ -43,6 +51,7 @@ const taskReducer = (state, { payload, type }) => {
       return {
         ...state,
         data: state.data?.filter((el) => el.id !== payload),
+        filter: state.filter?.filter((el) => el.id !== payload),
       };
 
     case 'FILTER_TASK':

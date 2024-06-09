@@ -1,15 +1,15 @@
 .rmdp-arrow {
-    border: solid rgba(0, 0, 0, 0.54);
-    border-width: 0 2px 2px 0;
+    border: solid rgba(0, 0, 0, 0.54) !important;
+    border-width: 0 2px 2px 0 !important;
 }
 
 .rmdp-week-day {
-    color: #4F4F4F;
-    font-weight: 700;
+    color: #4F4F4F !important;
+    font-weight: 700 !important;
 }
 .rmdp-day.rmdp-today span, .rmdp-day span {
-    background: transparent;
-    color: #4F4F4F;
+    background: transparent !important;
+    color: #4F4F4F !important;
 }
 
 .rmdp-day.rmdp-selected span:not(.highlight), .rmdp-day span:hover {

@@ -3,12 +3,12 @@ import CustomSvg from '../../../components/svg/svg';
 import { formatDate, uid } from '../../../utils/utils';
 import { addTask, editTask } from '../../../store/actions/task';
 
-const DateTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
+const DateTask = ({ taskData, setTaskData, onDelete, dispatch }) => {
   return (
     <>
       <CustomSvg
         icon='assets/icons/clock.svg'
-        isActive={data?.date ? 'primary' : ''}
+        isActive={taskData?.date ? 'primary' : ''}
       />
       <div className='ml-4 flex items-center border border-secondary py-1 px-2 rounded-md text-sm'>
         <DatePicker
@@ -20,7 +20,7 @@ const DateTask = ({ data, taskData, setTaskData, onDelete, dispatch }) => {
               ...taskData,
               date: new Date(e).toString(),
             });
-            if (data) {
+            if (taskData?.id) {
               editTask(dispatch, {
                 ...taskData,
                 date: new Date(e).toString(),

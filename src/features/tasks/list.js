@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CustomSvg from '../../components/svg/svg';
 import './task.css';
 import { formatDate, getDaysDiff } from '../../utils/utils';
@@ -16,25 +16,28 @@ const TaskList = ({ data, onDelete }) => {
   const [title, setTitle] = useState(data?.title ? false : true);
   const [desc, setDesc] = useState(false);
   const [expand, setExpand] = useState(data?.done === 1 ? true : false);
-  const [taskData, setTaskData] = useState(
-    data
-      ? data
-      : {
-          id: '',
-          title: '',
-          date: '',
-          desc: '',
-          bookmark: [],
-          done: 0,
-        }
-  );
+  const [taskData, setTaskData] = useState({});
+
+  useEffect(() => {
+    setTaskData(
+      data
+        ? data
+        : {
+            id: '',
+            title: '',
+            date: '',
+            desc: '',
+            bookmark: [],
+            done: 0,
+          }
+    );
+  }, [data]);
 
   return (
     <>
       <div className='py-[22px] text-darkSecondary'>
         <div className='flex items-center'>
           <Checkbox
-            data={data}
             taskData={taskData}
             setTaskData={setTaskData}
             dispatch={taskDispatch}
@@ -43,19 +46,18 @@ const TaskList = ({ data, onDelete }) => {
             <TitleTask
               title={title}
               setTitle={setTitle}
-              data={data}
               taskData={taskData}
               setTaskData={setTaskData}
               onDelete={() => onDelete()}
               dispatch={taskDispatch}
             />
             <div className='flex items-center text-sm gap-4'>
-              {data?.done === 0 && (
+              {taskData?.done === 0 && (
                 <p className='text-danger'>
-                  {data?.date ? getDaysDiff(data?.date) : ''}
+                  {taskData?.date ? getDaysDiff(taskData?.date) : ''}
                 </p>
               )}
-              <p>{formatDate(data?.date, 'mm/dd/yyyy')}</p>
+              <p>{formatDate(taskData?.date, 'mm/dd/yyyy')}</p>
               <button onClick={() => setExpand(!expand)}>
                 <CustomSvg
                   icon={`assets/icons/arrow-${expand ? 'down' : 'up'}.svg`}
@@ -75,7 +77,7 @@ const TaskList = ({ data, onDelete }) => {
                 <button
                   className='p-2 font-bold text-danger hover:bg-danger hover:text-white hover:rounded-md w-full text-start'
                   onClick={() => {
-                    deleteTask(taskDispatch, data?.id);
+                    deleteTask(taskDispatch, taskData?.id);
                     onDelete();
                   }}
                 >
@@ -98,7 +100,6 @@ const TaskList = ({ data, onDelete }) => {
           >
             <DateTask
               expand={expand}
-              data={data}
               taskData={taskData}
               setTaskData={setTaskData}
               onDelete={() => onDelete()}
@@ -116,7 +117,6 @@ const TaskList = ({ data, onDelete }) => {
             }}
           >
             <DescTask
-              data={data}
               desc={desc}
               setDesc={setDesc}
               taskData={taskData}
@@ -136,7 +136,6 @@ const TaskList = ({ data, onDelete }) => {
             }}
           >
             <BookmarkTask
-              data={data}
               taskData={taskData}
               setTaskData={setTaskData}
               onDelete={() => onDelete()}

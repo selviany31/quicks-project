@@ -4,7 +4,6 @@ import { uid } from '../../../utils/utils';
 const TitleTask = ({
   title,
   setTitle,
-  data,
   taskData,
   setTaskData,
   onDelete,
@@ -26,7 +25,7 @@ const TitleTask = ({
               if (e.key === 'Enter') {
                 setTitle(!title);
                 setTaskData({ ...taskData, title: e.target.value });
-                if (data) {
+                if (taskData?.id) {
                   editTask(dispatch, {
                     ...taskData,
                     title: e.target.value,
@@ -46,11 +45,11 @@ const TitleTask = ({
       ) : (
         <p
           className={`font-bold cursor-pointer ${
-            data?.done === 1 ? 'line-through text-secondary' : ''
+            taskData?.done === 1 ? 'line-through text-secondary' : ''
           }`}
-          onClick={() => (data?.done === 1 ? '' : setTitle(!title))}
+          onClick={() => (taskData?.done === 1 ? '' : setTitle(!title))}
         >
-          {data?.title}
+          {taskData?.title}
         </p>
       )}
     </div>
